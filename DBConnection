@@ -1,0 +1,15 @@
+# for the connection to the SQL-Server
+import pyodbc
+
+# ImportAdaption by FBR in order to withdraw the Data from the SQL-Server
+# create connection to SQL-Server
+conn = pyodbc.connect('Driver={SQL Server};'
+ 'Server=BGSQLDW;'
+ 'Database=dwh__dm;'
+ 'Trusted_Connection=yes;')
+ 
+# create a dataframe out of the SQL
+df_original = pd.read_sql_query('SELECT * FROM [PythonProjectData].[dbo].[View_PartnerClassification_Oversampling]', conn)
+
+# close the database connection using close() method, if it takes too long
+conn.close()
